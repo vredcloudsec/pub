@@ -1,0 +1,48 @@
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.InputEvent;
+import java.awt.MouseInfo;
+
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+public final class JavaRobotExample
+{
+    public static void main(String[] args) throws AWTException
+    {
+    Robot robot = new Robot();
+
+    robot.setAutoDelay(5);
+    robot.setAutoWaitForIdle(true);
+
+    /*robot.mouseMove(0, 0);
+    robot.delay(1000);
+    robot.mouseMove(200, 10);
+    robot.delay(1000);
+    robot.mouseMove(40, 130);*/
+
+	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
+	robot.delay(10000);
+	int pointX = MouseInfo.getPointerInfo().getLocation().x;
+	int pointY = MouseInfo.getPointerInfo().getLocation().y;
+	System.out.println("Starting mouse position ("+pointX+", "+pointY+")");
+	while (true) {
+		robot.delay(60000);
+		Date date = new Date();
+		System.out.println("Mouse moved at:"+dateFormat.format(date));
+		robot.mouseMove(pointX+200, pointY+100);
+		robot.delay(60000);
+		robot.mouseMove(pointX, pointY);
+		//robot.mousePress(InputEvent.BUTTON1_MASK);
+		//robot.delay(1000);
+		//robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		//robot.delay(10000);
+	}
+
+
+    //System.exit(0);
+    }
+}
